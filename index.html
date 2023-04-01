@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Js Basics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://unpkg.com/vue@3"></script>
+    <link href="./style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">My Vue</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a v-for="(link,index) in links" class="nav-item nav-link" :href="link.url"
+                    :key="index">{{link.text}}</a>
+                <a class="nav-item nav-link" href="#">{{links[1]}}</a>
+                <a class="nav-item nav-link" href="#">{{links[2]}}</a>
+            </div>
+        </div> -->
+    </nav>
+    <main>
+        <div>
+            <h4>The current count is .....</h4>
+            <h1>0</h1>
+            <button>-</button>
+            <button>+</button>
+        </div>
+    </main>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+
+                }
+            }
+        }).mount('body')
+    </script>
+</body>
+
+</html>

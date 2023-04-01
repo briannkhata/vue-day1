@@ -2,6 +2,26 @@
 import { ref } from 'vue'
 
 const showModal = ref(false)
+const newNote = ref("")
+const notes = ref([])
+
+function generateRandomLightColor() {
+  const r = Math.floor(Math.random() * 156) + 100; // Red value between 100 and 255
+  const g = Math.floor(Math.random() * 156) + 100; // Green value between 100 and 255
+  const b = Math.floor(Math.random() * 156) + 100; // Blue value between 100 and 255
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+const addNote = () => {
+  notes.value.push({
+    id: Math.floor(Math.random() * 1000000),
+    text: newNote.value,
+    date: new Date(),
+    backgroundColor: generateRandomLightColor()
+  })
+  showModal.value = false;
+  newNote.value = ""
+}
 
 </script>
 
@@ -10,8 +30,8 @@ const showModal = ref(false)
   <main>
     <div v-if="showModal" class="overlay">
       <div class="modal">
-        <textarea name="note" id="note" cols="30" rows="10"></textarea>
-        <button>Add Note</button>
+        <textarea v-model="newNote" name="note" id="note" cols="30" rows="10"></textarea>
+        <button @click="addNote">Add Note</button>
         <button @click="showModal = false" class="close">Close</button>
       </div>
     </div>
@@ -21,27 +41,17 @@ const showModal = ref(false)
         <button @click="showModal = true">+</button>
       </header>
       <div class="cards-container">
-        <div class="card">
+
+        <div v-for="note in notes" :key="note.id" class="card" :style="{ backgroundColor: note.backgroundColor }">
           <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptatibus accusantium tempore recusandae nemo
-            mollitia facere quidem nobis quis culpa impedit, cupiditate debitis quae illum eligendi asperiores nihil vel.
-            Ducimus.1
+            {{ note.text }}
           </p>
           <p class="date">
-            01/04/2023
+            {{ note.date.toLocaleDateString("en-US") }}
           </p>
         </div>
 
-        <div class="card">
-          <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptatibus accusantium tempore recusandae nemo
-            mollitia facere quidem nobis quis culpa impedit, cupiditate debitis quae illum eligendi asperiores nihil vel.
-            Ducimus.1
-          </p>
-          <p class="date">
-            01/04/2022
-          </p>
-        </div>
+
 
 
       </div>

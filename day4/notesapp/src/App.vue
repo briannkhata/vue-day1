@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 const showModal = ref(false)
 const newNote = ref("")
+const errorMessage = ref("")
 const notes = ref([])
 
 function generateRandomLightColor() {
@@ -13,6 +14,9 @@ function generateRandomLightColor() {
 }
 
 const addNote = () => {
+  if (newNote.value.length < 10) {
+    return errorMessage.value = "Note must have not less than 10 characters";
+  }
   notes.value.push({
     id: Math.floor(Math.random() * 1000000),
     text: newNote.value,
@@ -21,6 +25,7 @@ const addNote = () => {
   })
   showModal.value = false;
   newNote.value = ""
+  errorMessage.value = ""
 }
 
 </script>
@@ -30,7 +35,8 @@ const addNote = () => {
   <main>
     <div v-if="showModal" class="overlay">
       <div class="modal">
-        <textarea v-model="newNote" name="note" id="note" cols="30" rows="10"></textarea>
+        <textarea v-model.trim="newNote" name="note" id="note" cols="30" rows="10"></textarea>
+        <p v-if="errorMessage">{{ errorMessage }}</p>
         <button @click="addNote">Add Note</button>
         <button @click="showModal = false" class="close">Close</button>
       </div>
@@ -50,9 +56,6 @@ const addNote = () => {
             {{ note.date.toLocaleDateString("en-US") }}
           </p>
         </div>
-
-
-
 
       </div>
     </div>
@@ -156,5 +159,9 @@ header button {
 .modal .close {
   background-color: red;
   margin-top: 7px;
+}
+
+.modal p {
+  color: red;
 }
 </style>
